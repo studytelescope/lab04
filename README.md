@@ -21,11 +21,15 @@ $ open https://travis-ci.org
 
 ## Tutorial
 
+Set up global environment variables
+
 ```ShellSession
 # Setting environment variables
 $ export GITHUB_USERNAME=<имя_пользователя>
 $ export GITHUB_TOKEN=<полученный_токен>
 ```
+
+Get in the work dir
 
 ```ShellSession
 # Organization of a work directory
@@ -33,6 +37,8 @@ $ cd ${GITHUB_USERNAME}/workspace
 $ pushd .
 $ source scripts/activate
 ```
+
+Get travis cli using rvm - ruby version manager
 
 ```ShellSession
 # Installing ruby version manager
@@ -131,6 +137,8 @@ Done installing documentation for multipart-post, faraday, faraday_middleware, h
 19 gems installed
 ```
 
+Get new repo on the basis of the previous one
+
 ```ShellSession
 # Linking with remote repo
 $ git clone https://github.com/${GITHUB_USERNAME}/lab03 projects/lab04
@@ -146,14 +154,14 @@ $ git remote remove origin
 $ git remote add origin https://github.com/${GITHUB_USERNAME}/lab04
 ```
 
+Create and fill .travis.yml - travis config file
+
 ```ShellSession
 # Writing some stuff into travis.yml
 $ cat > .travis.yml <<EOF
 language: cpp
 EOF
-```
 
-```ShellSession
 # Writing some stuff into travis.yml
 $ cat >> .travis.yml <<EOF
 
@@ -162,9 +170,7 @@ script:
 - cmake --build _build
 - cmake --build _build --target install
 EOF
-```
 
-```ShellSession
 # Writing some stuff into travis.yml
 $ cat >> .travis.yml <<EOF
 
@@ -178,10 +184,14 @@ addons:
 EOF
 ```
 
+Login travis cli using github token
+
 ```ShellSession
-# Logging into Travis via token
+# Logging Travis via token
 $ travis login --github-token ${GITHUB_TOKEN}
 ```
+
+Check if config file is valid
 
 ```ShellSession
 # Linter application
@@ -190,9 +200,7 @@ Hooray, .travis.yml looks valid :)
 
 ```
 
-```ShellSession
-$ ex -sc '1i|<фрагмент_вставки_значка>' -cx README.md
-```
+Commit changes
 
 ```ShellSession
 # Adding of files changed into local repo
@@ -202,18 +210,20 @@ $ git commit -m"added CI"
 $ git push origin master
 ```
 
+
+
 ```ShellSession
 # Application of Travis to configure project
 $ travis lint
 Hooray, .travis.yml looks valid :)
 
-$ travis accounts
+$ travis accounts #check accounts
 thedraftaccount (Thedraftaccount): subscribed, 4 repositories
 
-$ travis sync
+$ travis sync #syncronize accounts
 synchronizing: . done
 
-$ travis repos
+$ travis repos #check repositories
 thedraftaccount/lab01 (active: no, admin: yes, push: yes, pull: yes)
 Description: ???
 
@@ -226,16 +236,16 @@ Description: ???
 thedraftaccount/lab04 (active: no, admin: yes, push: yes, pull: yes)
 Description: ???
 
-$ travis enable
+$ travis enable #Enable Travis in project
 Detected repository as thedraftaccount/lab04, is this correct? |yes| yes
 thedraftaccount/lab04: enabled :)
 
-$ travis whatsup
+$ travis whatsup #List most recent builds
 nothing to show
 
-$ travis branches
-$ travis history
-$ travis show
+$ travis branches #Display status branch-wise
+$ travis history #Build history
+$ travis show #Whats going on
 no build yet for thedraftaccount/lab04
 
 ```
